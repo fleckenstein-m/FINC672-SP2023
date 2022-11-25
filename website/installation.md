@@ -4,15 +4,15 @@
 > This material is taken from _**Computational Thinking**, a live online Julia/Pluto textbook._ [(computationalthinking.mit.edu)](https://computationalthinking.mit.edu)
 
 
-## Step 1: Install Julia 1.7.2
+## Step 1: Install Julia 1.8.3
 
-Go to [https://julialang.org/downloads](https://julialang.org/downloads) and download the current stable release, Julia 1.7.2, using the correct version for your operating system (Linux x86, Mac, Windows, etc).
+Go to [https://julialang.org/downloads](https://julialang.org/downloads) and download the current stable release, Julia 1.8.3, using the correct version for your operating system (Linux x86, Mac, Windows, etc).
 
 *Mac users beware!* Do **not** download the ARM/M-series version of Julia! It is still experimental and some packages will not work.
 
 ## Step 2: Run Julia
 
-After installing, **make sure that you can run Julia**. On some systems, this means searching for the "Julia 1.7.2" program installed on your computer; in others, it means running the command `julia` in a terminal. Make sure that you can execute `1 + 1`:
+After installing, **make sure that you can run Julia**. On some systems, this means searching for the "Julia 1.8.3" program installed on your computer; in others, it means running the command `julia` in a terminal. Make sure that you can execute `1 + 1`:
 
 ![image](https://user-images.githubusercontent.com/6933510/91439734-c573c780-e86d-11ea-8169-0c97a7013e8d.png)
 
@@ -30,7 +30,7 @@ To install Pluto, we want to run a _package manager command_. To switch from _Ju
 ```julia
 julia> ]
 
-(@v1.7) pkg>
+(@v1.8) pkg>
 ```
 
 The line turns blue and the prompt changes to `pkg>`, telling you that you are now in _package manager mode_. This mode allows you to do operations on **packages** (also called libraries).
@@ -39,7 +39,7 @@ To install Pluto, run the following (case sensitive) command to *add* (install) 
 You should only need to do this *once* for each installation of Julia:
 
 ```julia
-(@v1.7) pkg> add Pluto
+(@v1.8) pkg> add Pluto
 ```
 
 This might take a couple of minutes, so you can go get yourself a cup of tea!
@@ -79,8 +79,6 @@ If nothing happens in the browser the first time, close Julia and try again. And
 ## Step 2a: Opening a notebook from the web
 
 This is the main menu - here you can create new notebooks, or open existing ones. Our homework assignments will always be based on a _template notebook_, available in this GitHub repository. To start from a template notebook on the web, you can _paste the URL into the blue box_ and press ENTER.
-
-For example, homework 0 is available [here](/hw0/). Go to this page, and on the top right, click on the button that says "Edit or run this notebook". From these instructions, copy the notebook link, and paste it into the box. Press ENTER, and select OK in the confirmation box.
 
 ![image](https://user-images.githubusercontent.com/6933510/91441968-6b750100-e871-11ea-974e-3a6dfd80234a.png)
 
