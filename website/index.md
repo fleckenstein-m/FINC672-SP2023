@@ -3,8 +3,8 @@
 
 
 * **Instructor:** Matthias Fleckenstein, [mflecken@udel.edu](mailto:mflecken@udel.edu)
-* **Class Times:** Tuesdays and Thursdays, 9.30am-10:45am, Purnell Hall 324A
-* **Class Location:** Allfred Lerner Hall, Room 230
+* **Class Times:** Tuesdays and Thursdays, 9.30am-10:45am 
+* **Class Location:** Purnell Hall 324A
 * **Office Hours:** Fridays, 8.00am - 10.00am, [Zoom](https://udel.zoom.us/j/94451272322) or by appointment.
 
 @def mintoclevel=2 
@@ -23,7 +23,7 @@
 ---
 
 
-# Class Times
+## Class Times
 
 |             | FINC-672 (Section 010)        | 
 | --------    | ----------------------------  | 
@@ -32,12 +32,12 @@
 | Location    | Purnell Hall 324A             | 
 
 
-# Office Hours
+## Office Hours
 Office hours will be held via Zoom on Fridays from 8.00am to 10.00am, or by appointment.
 The Zoom link is: [https://udel.zoom.us/j/94451272322](https://udel.zoom.us/j/94451272322).
 
 
-# Course Webpage
+## Course Webpage
 [https://fleckenstein-m.github.io/FINC672-SP2022/](https://fleckenstein-m.github.io/FINC672-SP2022/)
 
 
@@ -63,7 +63,7 @@ All course materials will be posted on the course webpage at [https://fleckenste
 
 
 
-# Grading Policy
+## Grading Policy
 
 Your final grade is based on i) two midterm exams, ii) a final exam, and iii) class participation. Grading is on a curve. This means that you will be ranked relative to all students in both sections based on your two midterms, the final exam, and quizzes. The weighting shown below under Final Grade Breakdown determines your final rank among all students enrolled in the sections I teach.
 
@@ -74,6 +74,7 @@ Your final grade is based on i) two midterm exams, ii) a final exam, and iii) cl
   - *April 12, 2022*
 - 30% Final Exam
   - *May 17, 2022*
+
 
 # Assessment Component: Class Participation
 
