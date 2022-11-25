@@ -26,9 +26,9 @@
 ## Class Times
 
 |             | FINC-672 (Section 010)        | 
-| --------    | ----------------------------  | 
+| :--------:  | :----------------------------:| 
 | Day(s)      | Tue, Thu                      | 
-| Time        | 9.30am-11.45am               | 
+| Time        | 9.30am-11.45am                | 
 | Location    | Purnell Hall 324A             | 
 
 
