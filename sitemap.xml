@@ -8,6 +8,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>calendar/index.html</loc>
+    <lastmod>2022-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>installation/index.html</loc>
     <lastmod>2022-11-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -15,12 +21,6 @@
 </url>
 <url>
     <loc>index.html</loc>
-    <lastmod>2022-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>syllabus/index.html</loc>
     <lastmod>2022-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
