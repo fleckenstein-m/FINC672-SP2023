@@ -221,8 +221,7 @@ end
 
 # ╔═╡ 3e93e57c-3660-416f-9874-d43abf99e60e
 INSTRUCTORS = [
-	(name = "Person 1", url = ""),
-	(name = "Person 2", url = "")
+	(name = "Prof. Matt Fleckenstein", url = "")
 ] |> instructors
 
 # ╔═╡ d78c58e5-3ecb-45ee-972e-20fc90ece3cc
