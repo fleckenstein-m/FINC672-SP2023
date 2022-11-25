@@ -31,11 +31,11 @@
 <blockquote>
 <p><strong>Acknowledgement</strong> <br/> This material is taken from <em><strong>Computational Thinking</strong>, a live online Julia/Pluto textbook.</em> <a href="https://computationalthinking.mit.edu">&#40;computationalthinking.mit.edu&#41;</a></p>
 </blockquote>
-<h2 id="step_1_install_julia_172"><a href="#step_1_install_julia_172" class="header-anchor">Step 1: Install Julia 1.7.2</a></h2>
-<p>Go to <a href="https://julialang.org/downloads">https://julialang.org/downloads</a> and download the current stable release, Julia 1.7.2, using the correct version for your operating system &#40;Linux x86, Mac, Windows, etc&#41;.</p>
+<h2 id="step_1_install_julia_183"><a href="#step_1_install_julia_183" class="header-anchor">Step 1: Install Julia 1.8.3</a></h2>
+<p>Go to <a href="https://julialang.org/downloads">https://julialang.org/downloads</a> and download the current stable release, Julia 1.8.3, using the correct version for your operating system &#40;Linux x86, Mac, Windows, etc&#41;.</p>
 <p><em>Mac users beware&#33;</em> Do <strong>not</strong> download the ARM/M-series version of Julia&#33; It is still experimental and some packages will not work.</p>
 <h2 id="step_2_run_julia"><a href="#step_2_run_julia" class="header-anchor">Step 2: Run Julia</a></h2>
-<p>After installing, <strong>make sure that you can run Julia</strong>. On some systems, this means searching for the &quot;Julia 1.7.2&quot; program installed on your computer; in others, it means running the command <code>julia</code> in a terminal. Make sure that you can execute <code>1 &#43; 1</code>:</p>
+<p>After installing, <strong>make sure that you can run Julia</strong>. On some systems, this means searching for the &quot;Julia 1.8.3&quot; program installed on your computer; in others, it means running the command <code>julia</code> in a terminal. Make sure that you can execute <code>1 &#43; 1</code>:</p>
 <p><img src="https://user-images.githubusercontent.com/6933510/91439734-c573c780-e86d-11ea-8169-0c97a7013e8d.png" alt="image" /></p>
 <p><em>Make sure that you are able to launch Julia and calculate <code>1&#43;1</code> before proceeding&#33;</em></p>
 <h2 id="step_3_install_a_hrefhttpsgithubcomfonspplutojlpluto"><a href="#step_3_install_a_hrefhttpsgithubcomfonspplutojlpluto" class="header-anchor">Step 3: Install <a href="https://github.com/fonsp/Pluto.jl"><code>Pluto</code></a></a></h2>
@@ -45,10 +45,10 @@
 <p>To install Pluto, we want to run a <em>package manager command</em>. To switch from <em>Julia</em> mode to <em>Pkg</em> mode, type <code>&#93;</code> &#40;closing square bracket&#41; at the <code>julia&gt;</code> prompt:</p>
 <pre><code class="language-julia">julia&gt; &#93;
 
-&#40;@v1.7&#41; pkg&gt;</code></pre>
+&#40;@v1.8&#41; pkg&gt;</code></pre>
 <p>The line turns blue and the prompt changes to <code>pkg&gt;</code>, telling you that you are now in <em>package manager mode</em>. This mode allows you to do operations on <strong>packages</strong> &#40;also called libraries&#41;.</p>
 <p>To install Pluto, run the following &#40;case sensitive&#41; command to <em>add</em> &#40;install&#41; the package to your system by downloading it from the internet. You should only need to do this <em>once</em> for each installation of Julia:</p>
-<pre><code class="language-julia">&#40;@v1.7&#41; pkg&gt; add Pluto</code></pre>
+<pre><code class="language-julia">&#40;@v1.8&#41; pkg&gt; add Pluto</code></pre>
 <p>This might take a couple of minutes, so you can go get yourself a cup of tea&#33;</p>
 <p><img src="https://user-images.githubusercontent.com/6933510/91440380-ceb16400-e86e-11ea-9352-d164911774cf.png" alt="image" /></p>
 <p>You can now close the terminal.</p>
@@ -71,7 +71,6 @@ julia&gt; Pluto.run&#40;&#41;</code></pre>
 <p>If nothing happens in the browser the first time, close Julia and try again. And please let us know&#33;</p>
 <h2 id="step_2a_opening_a_notebook_from_the_web"><a href="#step_2a_opening_a_notebook_from_the_web" class="header-anchor">Step 2a: Opening a notebook from the web</a></h2>
 <p>This is the main menu - here you can create new notebooks, or open existing ones. Our homework assignments will always be based on a <em>template notebook</em>, available in this GitHub repository. To start from a template notebook on the web, you can <em>paste the URL into the blue box</em> and press ENTER.</p>
-<p>For example, homework 0 is available <a href="/FINC672-SP2023/hw0/">here</a>. Go to this page, and on the top right, click on the button that says &quot;Edit or run this notebook&quot;. From these instructions, copy the notebook link, and paste it into the box. Press ENTER, and select OK in the confirmation box.</p>
 <p><img src="https://user-images.githubusercontent.com/6933510/91441968-6b750100-e871-11ea-974e-3a6dfd80234a.png" alt="image" /></p>
 <p><strong>The first thing we will want to do is to save the notebook somewhere on our own computer; see below.</strong> </p>
 <h2 id="step_2b_opening_an_existing_notebook_file"><a href="#step_2b_opening_an_existing_notebook_file" class="header-anchor">Step 2b: Opening an existing notebook file</a></h2>
