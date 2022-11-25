@@ -2,13 +2,7 @@
     {
         "title": "Preliminaries",
         "contents": [
-            {
-                "name": "Lecture_00",
-                "notebook_path": "slides/20221125_Lect_00.pdf",
-                "video_id": "",
-                "preview_image_url": ""
-            },
-	   {
+	        {
                 "name": "GitHub & Open Source Software",
                 "notebook_path": "notebooks/week12/how_to_collaborate_on_software.jl",
                 "video_id": "7N9Vvc8amGM",

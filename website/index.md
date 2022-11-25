@@ -38,7 +38,7 @@ The Zoom link is: [https://udel.zoom.us/j/94451272322](https://udel.zoom.us/j/94
 
 
 ## Course Webpage
-[https://fleckenstein-m.github.io/FINC672-SP2022/](https://fleckenstein-m.github.io/FINC672-SP2022/)
+[https://fleckenstein-m.github.io/FINC672-SP2023/](https://fleckenstein-m.github.io/FINC672-SP2023/)
 
 
 ## Canvas Page
@@ -58,7 +58,7 @@ After completing this course, students will have a thorough understanding of fun
 [Syllabus](./assets/FINC672_Syllabus_SP23.pdf)
 
 ## Course Materials
-All course materials will be posted on the course webpage at [https://fleckenstein-m.github.io/FINC672-SP2022/](https://fleckenstein-m.github.io/FINC672-SP2022/).
+All course materials will be posted on the course webpage at [https://fleckenstein-m.github.io/FINC672-SP2023/](https://fleckenstein-m.github.io/FINC672-SP2023/).
 
 
 
