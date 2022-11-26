@@ -106,7 +106,7 @@ show_section_number = false
 pages = [
 	(page = "/calendar/", title = "Calendar"),
 	(page = "/installation/", title = "Software installation"),
-	(page = "/juliaslides/", title = "Julia Programming Fundamentals")
+	(page = "/whyjulia/", title = "Why Julia?")
 	]
 
 # ╔═╡ c0768146-5ea0-4736-94f8-2c1a2affa922
