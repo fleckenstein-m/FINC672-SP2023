@@ -242,7 +242,7 @@ md"""
 """
 
 # ╔═╡ 05878d95-1307-49a9-b6cd-ea39c18fa38e
-CSV.File("bonds.csv") |> DataFrame	
+CSV.File("./bonds.csv") |> DataFrame	
 
 # ╔═╡ 57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 md"""
@@ -265,7 +265,7 @@ md"""
 """
 
 # ╔═╡ b00bbb6d-c453-4b89-b6ed-ae301a980fc8
-df = DataFrame(XLSX.readtable("bonds.xlsx","Sheet1"))
+df = DataFrame(XLSX.readtable("./bonds.xlsx","Sheet1"))
 
 # ╔═╡ a1037974-9df4-4b6c-a5a4-dedf2596090f
 md"""
