@@ -241,8 +241,11 @@ md"""
   - Here we use the |> operator to "send" the CSV file into a DataFrame
 """
 
+# ╔═╡ 67c4c239-4f6e-44cc-a555-b5e6d6cc5aac
+pwd()
+
 # ╔═╡ 05878d95-1307-49a9-b6cd-ea39c18fa38e
-CSV.File("notebooks/JuliaBasics/Lect06/bonds.csv") |> DataFrame	
+CSV.File("./notebooks/JuliaBasics/Lect06/bonds.csv") |> DataFrame	
 
 # ╔═╡ 57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 md"""
@@ -1333,6 +1336,7 @@ version = "17.4.0+0"
 # ╠═76bf4ae7-ac48-4277-aaa1-6bad92e06a20
 # ╟─6439040e-06e7-463a-8ac2-0fa08d2d501d
 # ╟─7060827d-47a2-457e-a42e-2e93a9473e34
+# ╠═67c4c239-4f6e-44cc-a555-b5e6d6cc5aac
 # ╠═05878d95-1307-49a9-b6cd-ea39c18fa38e
 # ╟─57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 # ╟─ba873c6d-af46-400c-9d14-b9c491a84e5d
