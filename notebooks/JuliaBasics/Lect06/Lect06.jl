@@ -242,7 +242,7 @@ md"""
 """
 
 # ╔═╡ 05878d95-1307-49a9-b6cd-ea39c18fa38e
-CSV.File("./bonds.csv") |> DataFrame	
+CSV.File("notebooks/JuliaBasics/Lect06/bonds.csv") |> DataFrame	
 
 # ╔═╡ 57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 md"""
