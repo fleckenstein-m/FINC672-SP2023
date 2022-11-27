@@ -145,12 +145,12 @@ md"""
 """
 
 # ╔═╡ 2cf46eeb-9373-46a5-811a-aad1ceae25b6
-let
-	frm = ["firmA","firmB","firmC","firmD"]
-	px = [70.0, 80.0, 100.0, 110.0]
-	cpn = [5.00, 3.75, 2.50, 2.00]
+begin
+	frm0 = ["firmA","firmB","firmC","firmD"]
+	px0 = [70.0, 80.0, 100.0, 110.0]
+	cpn0 = [5.00, 3.75, 2.50, 2.00]
 	
-	df = DataFrame(firm=frm, price=px, coupon=cpn)
+	df = DataFrame(firm=frm0, price=px0, coupon=cpn0)
 	
 end
 
@@ -288,7 +288,7 @@ md"""
 """
 
 # ╔═╡ b00bbb6d-c453-4b89-b6ed-ae301a980fc8
-df = DataFrame(XLSX.readtable("./bonds.xlsx","Sheet1"))
+DataFrame(XLSX.readtable("./bonds.xlsx","Sheet1"))
 
 # ╔═╡ a1037974-9df4-4b6c-a5a4-dedf2596090f
 md"""
