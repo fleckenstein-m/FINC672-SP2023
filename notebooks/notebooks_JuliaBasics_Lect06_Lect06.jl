@@ -209,16 +209,21 @@ md"""
 # ╔═╡ 64bf07f5-6bd3-4325-bb5e-41e2e606eeda
 using CSV
 
+# ╔═╡ 1535d83b-f8a0-457f-9acb-ea66d08e5196
+md"""
+# Writing data to CSV files
+"""
+
 # ╔═╡ 71c441b2-fca3-4382-bf07-5963c71a73a3
 md"""
 - We can now use our previous data on bonds and write it to CSV.
 """
 
 # ╔═╡ 7e952365-3c23-48c1-a0b1-28f49668471a
-# path = "bonds.csv"
+path = "bonds.csv"
 
 # ╔═╡ 76bf4ae7-ac48-4277-aaa1-6bad92e06a20
-# CSV.write(path, df)
+CSV.write(path, df)
 
 # ╔═╡ 6439040e-06e7-463a-8ac2-0fa08d2d501d
 md"""
@@ -236,20 +241,41 @@ md"""
 pwd()
 
 # ╔═╡ 05878d95-1307-49a9-b6cd-ea39c18fa38e
-CSV.File("./notebooks/JuliaBasics/Lect06/bonds.csv") |> DataFrame	
+CSV.File("bonds.csv") |> DataFrame	
+
+# ╔═╡ 4585b547-af4a-4df1-b184-77d715a0c1f3
+md"""
+# Writing data to Excel files
+"""
+
+# ╔═╡ 0270b474-c4e9-41cf-9235-daf89aefba16
+md"""
+- Let’s now write the bonds data to an Excel file.
+- First, we need to load the `XLSX.jl` package.
+"""
+
+# ╔═╡ d5b567d3-0444-48a5-9a40-30a36a9d69e3
+using XLSX
+
+# ╔═╡ 6dd4c140-2172-4f5f-954a-40112fd43283
+md"""
+- Here, we need to provide the tabular data (data) and the column names (cols) individually to `writetable`.
+- We get the data by collecting each column. This is what `collect(eachcol(df))` does.
+- We get the column names by using `names(df)`.
+"""
+
+# ╔═╡ 67e6c75e-5bc8-4794-a8f0-4a447056d831
+let
+	path="bonds.xlsx";
+	data=collect(eachcol(df));
+	cols=names(df);
+	XLSX.writetable(path,data,cols, overwrite=true)
+end
 
 # ╔═╡ 57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 md"""
 # Reading Data From Excel Files
 """
-
-# ╔═╡ ba873c6d-af46-400c-9d14-b9c491a84e5d
-md"""
-- To load an Excel file, we first need to add the `XLSX.jl` package.
-"""
-
-# ╔═╡ d5b567d3-0444-48a5-9a40-30a36a9d69e3
-using XLSX
 
 # ╔═╡ 2b8c7816-c887-4e32-86f0-8b1ff9d90df2
 md"""
@@ -1332,6 +1358,7 @@ version = "17.4.0+0"
 # ╟─3b9d1877-bdfe-4a02-8208-0d62a2a5f469
 # ╟─23ed4509-0d6d-4da2-971b-8e17aff2227a
 # ╠═64bf07f5-6bd3-4325-bb5e-41e2e606eeda
+# ╟─1535d83b-f8a0-457f-9acb-ea66d08e5196
 # ╟─71c441b2-fca3-4382-bf07-5963c71a73a3
 # ╠═7e952365-3c23-48c1-a0b1-28f49668471a
 # ╠═76bf4ae7-ac48-4277-aaa1-6bad92e06a20
@@ -1339,9 +1366,12 @@ version = "17.4.0+0"
 # ╟─7060827d-47a2-457e-a42e-2e93a9473e34
 # ╠═67c4c239-4f6e-44cc-a555-b5e6d6cc5aac
 # ╠═05878d95-1307-49a9-b6cd-ea39c18fa38e
-# ╟─57cedb4d-1448-42f7-b15c-5f2e0eb29d96
-# ╟─ba873c6d-af46-400c-9d14-b9c491a84e5d
+# ╟─4585b547-af4a-4df1-b184-77d715a0c1f3
+# ╟─0270b474-c4e9-41cf-9235-daf89aefba16
 # ╠═d5b567d3-0444-48a5-9a40-30a36a9d69e3
+# ╟─6dd4c140-2172-4f5f-954a-40112fd43283
+# ╠═67e6c75e-5bc8-4794-a8f0-4a447056d831
+# ╟─57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 # ╟─2b8c7816-c887-4e32-86f0-8b1ff9d90df2
 # ╟─d4f555fe-481a-4f93-a421-a1a37c770062
 # ╠═b00bbb6d-c453-4b89-b6ed-ae301a980fc8
