@@ -45,5 +45,16 @@
                 "preview_image_url": ""
             }
         ]
+    },
+    {
+        "title": "DataFrames",
+        "contents": [
+            {
+                "name": "Labor Force Participation",
+                "notebook_path": "notebooks/Lect08/Lect_08_wSol.jl",
+                "video_id": "",
+                "preview_image_url": ""
+            }
+        ]
     }
 ]

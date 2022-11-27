@@ -157,12 +157,12 @@ md"""
 """
 
 # ╔═╡ 2cf46eeb-9373-46a5-811a-aad1ceae25b6
-let
-	frm = ["firmA","firmB","firmC","firmD"]
-	px = [70.0, 80.0, 100.0, 110.0]
-	cpn = [5.00, 3.75, 2.50, 2.00]
+begin
+	frm0 = ["firmA","firmB","firmC","firmD"]
+	px0 = [70.0, 80.0, 100.0, 110.0]
+	cpn0 = [5.00, 3.75, 2.50, 2.00]
 	
-	df = DataFrame(firm=frm, price=px, coupon=cpn)
+	df = DataFrame(firm=frm0, price=px0, coupon=cpn0)
 	
 end
 
@@ -231,6 +231,9 @@ md"""
 # ╔═╡ 7e952365-3c23-48c1-a0b1-28f49668471a
 path = "bonds.csv"
 
+# ╔═╡ 76bf4ae7-ac48-4277-aaa1-6bad92e06a20
+CSV.write(path, df)
+
 # ╔═╡ 6439040e-06e7-463a-8ac2-0fa08d2d501d
 md"""
 # Reading Data From CSV Files
@@ -267,6 +270,14 @@ md"""
 - We get the column names by using `names(df)`.
 """
 
+# ╔═╡ 67e6c75e-5bc8-4794-a8f0-4a447056d831
+let
+	path="bonds.xlsx";
+	data=collect(eachcol(df));
+	cols=names(df);
+	XLSX.writetable(path,data,cols, overwrite=true)
+end
+
 # ╔═╡ 57cedb4d-1448-42f7-b15c-5f2e0eb29d96
 md"""
 # Reading Data From Excel Files
@@ -283,18 +294,7 @@ md"""
 """
 
 # ╔═╡ b00bbb6d-c453-4b89-b6ed-ae301a980fc8
-df = DataFrame(XLSX.readtable("./bonds.xlsx","Sheet1"))
-
-# ╔═╡ 76bf4ae7-ac48-4277-aaa1-6bad92e06a20
-CSV.write(path, df)
-
-# ╔═╡ 67e6c75e-5bc8-4794-a8f0-4a447056d831
-let
-	path="bonds.xlsx";
-	data=collect(eachcol(df));
-	cols=names(df);
-	XLSX.writetable(path,data,cols, overwrite=true)
-end
+DataFrame(XLSX.readtable("./bonds.xlsx","Sheet1"))
 
 # ╔═╡ a1037974-9df4-4b6c-a5a4-dedf2596090f
 md"""
