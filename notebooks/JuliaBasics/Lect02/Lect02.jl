@@ -6,7 +6,7 @@ using InteractiveUtils
 
 # ╔═╡ ab6ac8d0-6d8a-11ed-0400-1b357312718e
 md"""
-# FINC 672 - Julia Fundamentals
+# FINC 672 - Julia Data Structures I
 """
 
 # ╔═╡ 42d2dc69-c5e8-4cb8-809b-19cae75e479d
@@ -15,15 +15,16 @@ begin
 	<fieldset>      
     <legend><b>Learning Objectives</b></legend>      
 	<br>
-	<input type="checkbox" value=""> Basic Julia Syntax
+	<input type="checkbox" value=""> Array, Vector
 	<br>
-	<input type="checkbox" value=""> Variables
+	<input type="checkbox" value=""> Array Inspection
 	<br>
-	<input type="checkbox" value=""> Boolean Operators and Numeric Comparisons
+	<input type="checkbox" value=""> Concatenation
 	<br>
-	<input type="checkbox" value=""> Functions
+	<input type="checkbox" value=""> Indexing, Slicing
 	<br>
-	<input type="checkbox" value=""> Control Flow and Loops
+	<input type="checkbox" value=""> Array Manipulation
+	<br>
 	<br>
 	</fieldset>      
 	"""
@@ -33,478 +34,548 @@ end
 #add button to trigger presentation mode
 html"<button onclick='present()'>present</button>"
 
-# ╔═╡ 15965456-03b5-41fc-bd5a-e0334f2e48f1
+# ╔═╡ 3b735bec-07fe-42cc-903f-7be58c7d0b5c
+md"""
+# Arrays and Vectors
+"""
+
+# ╔═╡ a80e0671-4028-4c13-9245-ed2833b14507
+md"""
+- Arrays are a systematic arrangement of similar objects, usually in rows and columns.
+- Let’s start with arrays types. There are several, but we will focus on two.
+  - `Vector{T}`: one-dimensional array. Alias for `Array{T, 1}`.
+  - `Matrix{T}`: two-dimensional array. Alias for `Array{T, 2}`.
+  - For example, `Vector{Int64}` is a __Vector__ which all elements are `Int64`s and `Matrix{Float64}` is a Matrix in which all elements are subtypes of `Float64`.
+- Most of the time, especially when dealing with tabular data, we are using either one- or two-dimensional arrays.
+- We can use the aliases Vector and Matrix for clear and concise syntax
+"""
+
+# ╔═╡ 726fb7b2-fd76-4a5f-8df3-219ac81128a1
+md"""
+# Array Construction
+"""
+
+# ╔═╡ 71a59a18-3d2f-4eec-8da0-3ca22c422c69
+md"""
+- How do we construct an array? The simplest answer is to use the default constructor.
+- It accepts the element type as the type parameter inside the `{}` brackets and inside the constructor you pass the element type followed by the dimensions.
+- It is common to initialize vector and matrices with undefined elements by using the `undef` argument for type.
+"""
+
+# ╔═╡ 4bcf1a6e-3931-4124-b069-aec95d555ffb
 md"""
 #
 """
 
-# ╔═╡ 965c2f3a-7aed-48db-9f34-880812267c2a
+# ╔═╡ 1839b7b9-8070-4605-929d-a5bbebb586be
 md"""
-- Today, we cover the basics of Julia as a programming language. Having a basic understanding of Julia will make you more effective and efficient in using Julia.
-- This is going to be a very brief and not in-depth overview of the Julia language.
-- If you are already familiar and comfortable with other programming languages, I encourage you to read [Julia’s documentation](https://docs.julialang.org/). 
+- For example, a vector of 10 undef Float64 elements can be constructed as
 """
 
-# ╔═╡ 3632139a-33f4-443c-b692-4f61adc77edd
-md"""
-# Variables
-"""
-
-# ╔═╡ 14fadd48-e6fe-475f-92b8-8970b6487c05
-md"""
-- Variables are values that you tell the computer to store with a specific name so that you can later recover or change its value.
-- Julia has several types of variables but the most important are:
-  - Integers: `Int64`
-  - Real Numbers: `Float64`
-  - Boolean: `Bool`
-  - Strings: `String`
-"""
-
-# ╔═╡ 6d90d638-b7c1-4e0b-a1af-8b0cdfa943b2
-md"""
-#
-"""
-
-# ╔═╡ f406efa1-c642-498a-8bf4-cd4ddcd35f9f
-md"""
-- We create new variables by writing the variable name on the left and its value on the right, and in the middle, we use the `=` assignment operator.
-- For example, let's define two new variables: `name` and `age`.
-"""
-
-# ╔═╡ ade0df3a-f591-4c55-8032-c83005daa18a
+# ╔═╡ b2a58ad4-025a-4e76-8622-9eff84867fd8
 let
-	name = "Julia"
+	my_vector = Vector{Float64}(undef, 10)
 end
 
-# ╔═╡ 807e79b5-4c2c-446d-8018-8b1d43336255
-let
-	age = 9
-end
-
-# ╔═╡ 8e7f76a8-aef0-405f-b7e1-50ca7d98d6a1
+# ╔═╡ 84c3bb84-62c1-4062-89b0-c3958c00dfc7
 md"""
 #
 """
 
-# ╔═╡ 13109b52-c7b4-4260-9607-9ab2793efef7
+# ╔═╡ 933cd76a-992c-4279-b7b9-bb1aaa8c643d
 md"""
-!!! note 
-    In the two examples above, we used 
-	```
-	let
+- For matrices, we need to pass two dimensions arguments inside the constructor: one for rows and another for columns.
+- For example, a matrix with 10 rows, 2 columns is instantiated as.
+"""
+
+# ╔═╡ 27643565-c0de-452a-a54b-fa769a4fb599
+let
+	my_matrix = Matrix{Float64}(undef, 10, 2)
+end
+
+# ╔═╡ 556e7453-e960-44cc-97d1-1d9e52054e9a
+md"""
+#
+"""
+
+# ╔═╡ 51b7e526-114d-4c59-887f-293cee6ac1e6
+md"""
+- We also have some syntax aliases for the most common elements in array construction.
+- `zeros` for all elements being initialized to value zero.
+"""
+
+# ╔═╡ 41916a78-dd3d-481c-9eaf-e6e59ce62b7c
+let
+	my_vector_zeros = zeros(10)
+end
+
+# ╔═╡ de07142f-c954-4e7c-8311-bb14c1f19f6a
+md"""
+#
+"""
+
+# ╔═╡ 760f526d-231b-411e-ba54-4af6a7ff6128
+let
+	my_matrix_zeros = zeros(Int64, 10, 2)
+end
+
+# ╔═╡ 29084f06-4c3c-43f0-abdd-6e0019ca62d6
+md"""
+#
+"""
+
+# ╔═╡ 9115d5f2-51d1-436a-b537-fc6a9ce0f29e
+md"""
+- `ones` for all elements being initialized to value one.
+"""
+
+# ╔═╡ 8861dedb-facc-42c6-87ab-42a623f2e0f5
+let
+	my_vector_ones = ones(Int64, 10)
+end
+
+# ╔═╡ e0d056a3-ded8-4ee9-b538-d8333290c2de
+let
+	my_matrix_ones = ones(10, 2)
+end
+
+# ╔═╡ ebfcfe2b-a754-4102-a57d-d4201f1c533c
+md"""
+#
+"""
+
+# ╔═╡ 02ae1f16-2fab-46da-a8d1-0b2352f63741
+md"""
+- For other elements we can first intantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
+- Here’s an example with 3.14 ($\pi$).
+"""
+
+# ╔═╡ 0e651f7a-23fc-47ed-a669-fa057dd550d6
+let
+	my_matrix_π = Matrix{Float64}(undef, 2, 2);
 	
-	end
-	```
-	- This is to ensure that the variables we define are only known to Julia inside the cell.
-	- This means that we can redefine `name` and `age` somewhere else in the notebook.
-	- If we leave out `let` and `end`, the writing `age = 10` somewhere else in the notebook will give us an error.
-	- Within a cell, we can define new values for an existing variable. Julia will simply override the previous value with the new one.
-"""
-
-# ╔═╡ 9bf34305-6dec-46e2-95b4-c7b5d99a61e4
-let
-	age = 9
-	age = 10
+	fill!(my_matrix_π, 3.14)
 end
 
-# ╔═╡ aef0ecc7-ad76-4888-ad41-e54123d16d07
+# ╔═╡ 8460e092-cb1f-4695-8a27-f405af12ef97
 md"""
 #
 """
 
-# ╔═╡ 9aacb4dd-4d6e-4b62-87fa-19e364b83c38
+# ╔═╡ e6c3b951-c354-41ab-bac8-ab1d8ebb675b
 md"""
-- We can also do operations on variables such as addition or division. For example, let's multiply age by 3:
+- We can also create arrays with `array literals`.
+- For example a 2x2 matrix of integers.
 """
 
-# ╔═╡ 40deef2b-c458-43ba-acad-7c02f5ae5787
-let
-	age = 10
-	age * 3
-end
+# ╔═╡ 1d9439b4-81fe-4301-8d44-704fbbb7a3fb
+[[1 2]
+ [3 4]]
 
-# ╔═╡ 91a0bd38-0784-4123-876b-85d7361eb579
-md"""
-#
-"""
-
-# ╔═╡ 55a0a539-b89e-4544-9a8f-a6df6218c73b
-md"""
-- We can also do operations on a variable and update it. For example
-"""
-
-# ╔═╡ 5238a439-f5ee-4427-9533-b36965254a6d
-let
-	age = 10
-	age = age + 7
-	age
-end
-
-# ╔═╡ 33f27100-64c9-47ef-b60c-62beba7af90c
+# ╔═╡ dc687845-dde8-4fec-9a15-ad72eaf00dc9
 md"""
 #
 """
 
-# ╔═╡ cb046dfb-4007-4216-9743-9456e8e4d250
+# ╔═╡ e2aff1dd-bc55-4247-9ef5-0d179c1a9870
 md"""
-- We can inspect the types of variables by using the `typeof` function:
+- Array literals also accept a type specification before the `[]` brackets.
+- So, if we want the same 2x2 array as before but now as floats, we can do so.
 """
 
-# ╔═╡ 7ed413c6-c0e5-4b85-b4dc-08666c418b28
-let
-	age = 10
-	typeof(age)
-end
+# ╔═╡ a8741df0-a2e1-4e2e-adce-53519ae6838d
+Float64[[1 2]
+        [3 4]]
 
-# ╔═╡ 25c65694-fee6-4a51-bef6-6e8226bf97a0
-md"""
-# Boolean Operators and Numeric Comparisons
-"""
-
-# ╔═╡ 1d0c2cab-9c8f-44ea-8a1a-df5a80cb4d63
-md"""
-- Now that we’ve covered types, we can move to boolean operators and numeric comparisons.
-- We have three boolean operators in Julia:
-  - `!`: __NOT__
-  - `&&`: __AND__
-  - `||`: __OR__
-"""
-
-# ╔═╡ 2d20bd5f-e43e-4ff6-9080-0166046c8223
+# ╔═╡ 715474da-85e8-4480-ba58-27bd88def3b8
 md"""
 #
 """
 
-# ╔═╡ c94cad38-5363-4964-bc42-02010e0a506c
+# ╔═╡ 565acb98-6298-41de-9db1-4a6941c3177e
 md"""
-- Here are a few examples with some of them:
+- It also works for vect
 """
 
-# ╔═╡ 7d8602c2-5a98-472d-a660-15f5f4f60a16
-!true
+# ╔═╡ d0bf452e-92cc-4a60-a148-ad83460c8eb1
+Bool[0, 1, 0, 1]
 
-# ╔═╡ 82355982-8aeb-44e7-921f-7f99e4667c03
-(false && true) || (!false)
-
-# ╔═╡ 46fe46fb-a64d-4cb9-9556-9bdea3381a21
-(6 isa Int64) && (6 isa Real)
-
-# ╔═╡ c41f8840-5081-421e-9a2e-1b145f00b2ba
+# ╔═╡ 3dcc34e1-e6eb-4d7f-a800-2fdebd6ba510
 md"""
 #
 """
 
-# ╔═╡ aa452762-85fc-49c3-8e90-1da5d208d1b9
+# ╔═╡ 61ce12d0-9f61-4d9b-9120-b7142f5864f5
 md"""
-- Regarding numeric comparison, Julia has three major types of comparisons:
-  1. Equality: either something is equal or not equal another
-     - `==` "equal"
-     - `!=` or `≠` "not equal"
-  2. Less than: either something is less than or less than or equal to
-     - `<` "less than"
-     - `<=` or ≤ "less than or equal to"
-  3. Greater than: either something is greater than or greater than or equal to
-     - `>` "greater than"
-     - `>=` or `≥` "greater than or equal to"
+- You can even mix and match array literals with the constructors.
 """
 
-# ╔═╡ 1c2d78ab-ab20-424f-a532-b9e26dbc34b5
-md"""
-#  
-"""
+# ╔═╡ 492f1dbe-b100-484a-8fd5-a0691b3b2a11
+[ones(Int, 2, 2) zeros(Int, 2, 2)]
 
-# ╔═╡ 18716ab1-6ffc-43fa-a9b1-786effbce57d
-md"""
-- Examples
-"""
+# ╔═╡ c1d27a68-cf2c-4cab-a582-b9615ca18ffd
+[zeros(Int,2, 2)
+   ones(Int,2,2)]
 
-# ╔═╡ 187e1fd0-b8ba-47d6-9857-5d36c195c2c9
-1 == 1
-
-# ╔═╡ c960a390-9194-48bc-b8c3-b38503d2fa76
-1 >= 10
-
-# ╔═╡ 29cf39dc-62c5-4a57-add9-32c96c5efb95
+# ╔═╡ b75c1aa2-8d62-422e-b03a-a5ddcd26cd2c
 md"""
 #
 """
 
-# ╔═╡ ab728c25-7523-4f17-be2a-04f8d69a1182
+# ╔═╡ cc89b355-3f75-4267-86e0-b2c760719df2
 md"""
-- This even works between different types.
+- Another example.
 """
 
-# ╔═╡ aaa9341e-4a13-413e-a6ae-7217e6b5d021
-1 == 1.0
+# ╔═╡ 8a0363e3-b6ab-4a6b-9813-a5bd646d4862
+[ones(Int, 2, 2) [1; 2]
+ [3 4] 5]
 
-# ╔═╡ e9b473dd-dda5-44df-958b-3eafe9d65cd1
+# ╔═╡ f677c208-a001-4d21-8991-d2af09628a6f
 md"""
-- We can also mix and match boolean operators with numeric comparisons
+# Array Concatenation
 """
 
-# ╔═╡ 17febe2d-ac87-496b-9ebe-25da47922967
-(1 != 10) || (3.14 <= 2.71)
-
-# ╔═╡ be960870-e0ff-49a3-b14b-dd7716edf25b
+# ╔═╡ 2b4e44bd-d162-4c5a-99f0-bf495d15edaf
 md"""
-# Functions
+- Finally, we can also create arrays with concatenation functions.
+- `cat`: concatenate input arrays along a specific dimension `dims`
 """
 
-# ╔═╡ 6f182c16-b8f5-4835-9ce3-b21af62c5d5c
-md"""
-- Now that we already know how to define variables, let’s turn our attention to __functions__.
-- In Julia, a function maps argument values to one or more return values
-- The basic syntax is:
-```
-function function_name(arg1, arg2)
-	result = stuff with the arg1 and arg2
-return result
-```
-"""
+# ╔═╡ 635cb7dc-4d35-4160-87c3-c12a5266d2e4
+cat(ones(2), zeros(2), dims=1)
 
-# ╔═╡ e060e675-412f-4405-9bd1-eca0501a1b48
+# ╔═╡ cc4fd98f-6435-40f4-bbe6-da792a8e641c
+cat(ones(2), zeros(2), dims=2)
+
+# ╔═╡ 103bbcbd-c30d-45d4-972a-22931d82356b
 md"""
 #
 """
 
-# ╔═╡ d05e6344-74af-4fc6-b88d-6ec8204e1386
+# ╔═╡ 53fa1274-229d-40af-a469-e7c19cf40425
 md"""
-- The function declaration begins with the keyword `function` followed by the function name.
-- Then, inside parentheses `()`, we define the arguments separated by a comma `,`.
-- Inside the function, we specify what we want Julia to do with the parameters that we supplied.
-  - All variables that we define inside a function are deleted after the function returns, this is nice because it is like an automatic cleanup.
-  - After all the operations in the function body are finished, we instruct Julia to `return` the final result with the return statement.
-- Finally, we let Julia know that the function definition is finished with the `end` keyword.
+- `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`.
 """
 
-# ╔═╡ 3dad3232-da88-4f40-8faf-6ecaf2cf90e5
+# ╔═╡ 123674ab-7233-410b-ba2a-3feff99da66d
+vcat(ones(2), zeros(2))
+
+# ╔═╡ 1fbd4ffc-5aee-43b9-b4b7-205e4202b13f
 md"""
-#
+- `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`.
 """
 
-# ╔═╡ 217cdb78-2aa9-496e-9daa-f20f8e762bf3
+# ╔═╡ a159d681-a86a-45ff-8191-2e0447e54763
+hcat(ones(2), zeros(2))
+
+# ╔═╡ 343cff6e-7d4e-4ce5-bc01-a683681eb44b
 md"""
-Let’s dive into some examples. First, let’s create a new function that adds
-numbers together:
+# Array Inspection
 """
 
-# ╔═╡ 2cb1933c-50ac-4fed-844b-52aee0f45b71
-function add_numbers(x, y)
-	return x + y
-end
-
-# ╔═╡ bbd1e1c4-11f8-4e9e-9b53-d5111fe83342
+# ╔═╡ 7740c5cb-4523-41e1-b934-c73534ced614
 md"""
-#
+- Once we have arrays, the next logical step is to inspect them.
+- There are a lot of handy functions that allows the user to have an inner insight into any array.
+- It is most useful to know what type of elements are inside an array.
+- We can do this with `eltype`:
 """
 
-# ╔═╡ 4dd59b38-5e55-4272-8570-650061cb9edb
-md"""
-- Now, we can use our `add_numbers` function:
-"""
-
-# ╔═╡ 4329e88e-ecbe-4336-b453-fc657d4a1621
-add_numbers(17, 29)
-
-# ╔═╡ b37b6554-e1fd-4742-a80e-1829b5abd015
-md"""
-And it works also with floats
-"""
-
-# ╔═╡ a0bd7251-d107-4546-bc55-36157dc2f526
-add_numbers(3.14, 2.72)
-
-# ╔═╡ 9a2f2002-9bc6-4386-a579-b3903f8b61e1
-md"""
-#
-"""
-
-# ╔═╡ 766f70c4-afc4-4e31-86f2-575ee5604d30
-md"""
-- A function can, also, return two or more values.
-- See the new function `add_multiply` below
-"""
-
-# ╔═╡ b09bcf25-f482-4599-91ce-37781530d8f6
-function add_multiply(x, y)
+# ╔═╡ 11789c5f-14e4-418b-9c48-457cb555577e
+let 
+	my_matrix_π = Matrix{Float64}(undef, 2, 2);
+	fill!(my_matrix_π, 3.14)
 	
-	addition = x + y
-	multiplication = x * y
-	
-	return addition, multiplication
+	eltype(my_matrix_π)
 end
 
-# ╔═╡ 5941aeae-096f-477d-9f8d-99d0de53b527
+
+# ╔═╡ 23aef7de-4ad3-4cd2-92d6-92f55d471116
 md"""
 #
 """
 
-# ╔═╡ d1f1e579-de69-4380-acee-9f8793f3f256
+# ╔═╡ 3df473cc-3a0f-4dcc-a449-bfd19892f530
 md"""
-- In that case, we can do two things:
-  1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value
-  2. Or we can define just one variable to hold the function return values and access them with either first or last.
+- `size` is a little tricky.
+- By default it will return a `tuple` containing the array’s dimensions.
 """
 
-# ╔═╡ c756ea1a-af25-4152-85f2-7e75b9f18d5b
-md"""
-#
-"""
-
-# ╔═╡ 3b659642-6f7f-43ba-9f3d-99561a36e2c0
+# ╔═╡ 5cbad939-364c-4fe6-8bd5-f07952dc0901
 let
-	return_1, return_2 = add_multiply(1, 2)
+
+	my_matrix_π = Matrix{Float64}(undef, 2, 2);
+	fill!(my_matrix_π, 3.14)
 	
-	return_2
-end
-
-# ╔═╡ ce6c05f7-a5a4-4380-bf19-b5e801df1c04
-let
-	all_returns = add_multiply(1, 2)
-
-	last(all_returns)
-end
-
-# ╔═╡ 28e15a84-5b59-4732-ae2b-97398b75b987
-md"""
-# Conditional If-Else-Elseif
-"""
-
-# ╔═╡ 2d31ec89-d66f-441a-b3b5-9e6baaa77f8a
-md"""
-- In most programming languages, the user is allowed to control the computer’s flow of execution.
-- Depending on the situation, we want the computer to do one thing or another.
-- In Julia we can control the flow of execution with `if`, `elseif` and `else` keywords. These are known as conditional statements
-"""
-
-# ╔═╡ 33e4df84-304e-4047-a8bc-c9f97bc8ab38
-md"""
-#
-"""
-
-# ╔═╡ 7da6031d-600a-4100-ba62-0e312052eba7
-md"""
-- `if` keyword prompts Julia to evaluate an expression and depending on whether `true` or `false` certain portions of code will be executed.
-- We can compound several `if` conditions with the `elseif` keyword for complex control flow.
-- Finally, we can define an alterative portion to be executed if anything inside the `if` or `elseif`‘s is evaluated to `true`.
-- This is the purpose of the `else` keyword.
-- Finally, like all the previous keyword operators that we saw, we must tell Julia when the conditional statement is finished with the `end` keyword.
-"""
-
-# ╔═╡ 62c6d81a-4859-4dc5-9714-b44c117f6aca
-md"""
-#
-"""
-
-# ╔═╡ e8f7c3ce-256a-4291-b1e4-73dd0c11329d
-md"""
-- Here's an example with all the `if-elseif-else` keywords:
-"""
-
-# ╔═╡ b5d6e2ae-5ea1-4ed6-9a9e-8bf9c108e46c
-let
-	
-	a = 1
-	b = 2
-
-	if a < b
-		"a is less than b"
-	elseif a > b
-		"a is greater than b"
-	else
-		"a is equal to b"
-	end
+	size(my_matrix_π)
 	
 end
 
-# ╔═╡ 44d36e73-fb3b-4c12-83c7-cc4875927d8d
+# ╔═╡ 02acfe7a-b91a-4a2e-a6e9-8e6c3bb71dde
 md"""
 #
 """
 
-# ╔═╡ 5766ea83-6a34-4968-88f2-387337e06499
+# ╔═╡ 8069405a-4d69-460b-a569-42e66b3cda37
 md"""
-- We can even wrap this in a function called `compare`:
+- You can get a specific dimension with a second argument to size
 """
 
-# ╔═╡ 69addfa3-5a79-45fe-a05e-ccfd5e877722
-function compare(a, b)
-	if a < b
-	"a is less than b"
-	elseif a > b
-	"a is greater than b"
-	else
-	"a is equal to b"
-	end
-end
-
-# ╔═╡ ce2dbd2a-a5b8-4b9f-9ea6-3932029f4069
-compare(3.14, 3.14)
-
-# ╔═╡ 01cd64f7-e024-4def-a8b7-0a03f4276033
-md"""
-# For Loop
-"""
-
-# ╔═╡ 7b3bd5e1-7460-4c71-981b-c13176cf8b3d
-md"""
-- The classical for loop in Julia follows a similar syntax as the conditional statements.
-- You begin with a keyword, in this case `for`.
-- Then, you specify what Julia should "loop" for, i.e., a sequence.
-- Also, like everything else, you must finish with the `end` keyword.
-"""
-
-# ╔═╡ 31338853-5fce-41d8-8366-a0cd5cd8e1ac
-md"""
-#
-"""
-
-# ╔═╡ 8134e48e-0f43-44f4-93ef-91cbef4e7442
-md"""
-So, to make Julia print every number from 1 to 10, you can use the following for
-loop:
-"""
-
-# ╔═╡ cb389ce1-19b2-447e-af81-27b040b94ee5
-for i in 1:10
-	println(i)
-end
-
-# ╔═╡ 9d85e2dd-e003-4b89-92c4-7f863583770f
-md"""
-# While Loop
-"""
-
-# ╔═╡ a9694818-e967-431c-858c-a5e30f56962b
-md"""
-- The while loop is a mix of the previous conditional statements and for loops.
-- Here, the loop is executed every time the condition is true.
-- The syntax follows the same fashion as the previous one.
-- We begin with the keyword `while`, followed by the statement to evaluated as either `true`.
-- Like previously, you must end with the `end` keyword.
-"""
-
-# ╔═╡ 0a8e4dec-f313-49e6-9998-9690ae07b3e1
-md"""
-#
-"""
-
-# ╔═╡ 6d951c8d-22f5-4d6d-b4e8-13bf62b28bea
-md"""
-- Here’s an example
-"""
-
-# ╔═╡ f7da342c-f5ea-4a8c-b2ed-a7ebafb0ef6d
+# ╔═╡ a2e49d7a-904b-44c0-a4b5-822e16ec9dab
 let
 
-	n = 0
+	my_matrix_π = Matrix{Float64}(undef, 2, 2);
+	fill!(my_matrix_π, 3.14)
 	
-	while n < 3
-		n += 1
-	end
-
-	n
+	size(my_matrix_π, 2)
+	
 end
+
+
+# ╔═╡ 2a245bde-2f26-4611-8faf-5f88fe9d9dbb
+md"""
+# Array Indexing and Slicing
+"""
+
+# ╔═╡ 589f664c-02ff-412a-838f-8e6b3df6ce05
+md"""
+- Sometimes we want to only inspect certain parts of an array.
+- This is called indexing and slicing.
+- If you want a particular observation of a vector, or a row or column of a matrix; you’ll probably need to index an array.
+- First, let’s create an example vector and matrix.
+"""
+
+# ╔═╡ 364d326c-c6d7-4160-b62d-c38f9ddf5355
+md"""
+#
+"""
+
+# ╔═╡ b64631c0-9cec-4db4-a4b7-9e05cab1e1bf
+my_example_vector = [1, 2, 3, 4, 5]
+
+# ╔═╡ 326c4fe6-27e1-4686-8668-ed5004a36fcc
+my_example_matrix = [[1 2 3]
+					 [4 5 6]
+					 [7 8 9]]
+
+# ╔═╡ 121f44c8-b81a-4b98-8b14-244636f25b42
+md"""
+#
+"""
+
+# ╔═╡ 1d951c8d-d097-4dc2-b3a6-57de39d009c1
+md"""
+!!! attention
+    - Note that because we did not use a `let`-`end` block, `my_example_vector` and `my_example_matrix` can be accessed from all cells.
+    - We do not have to define them again, but for this notebook we can only define them __once__.
+"""
+
+# ╔═╡ 996a86e9-fc64-47e6-b17d-c47637b4f37f
+md"""
+#
+"""
+
+# ╔═╡ 175e936c-089b-447f-8a32-a4e050edd0ad
+md"""
+- Let’s see first an example with vectors.
+- Suppose you want the second element of a vector.
+- You append `[]` brackets with the desired index inside.
+"""
+
+# ╔═╡ eda6d22e-06ed-4bbc-81cf-84c92cb007b3
+my_example_vector[2]
+
+# ╔═╡ efb24862-cc37-4441-8c53-6c9743cd99a7
+md"""
+#
+"""
+
+# ╔═╡ 8677fc85-1733-4db9-98c6-46e534ac0222
+md"""
+- The same syntax follows with matrices.
+- But, since matrices are 2-dimensional arrays, we have to specify both rows and columns.
+-  Let’s retrieve the element from the second row (first dimension) and first column (second dimension).
+"""
+
+# ╔═╡ 7705e84f-4f52-4316-a630-36c3e904651f
+my_example_matrix[2, 1]
+
+# ╔═╡ 146caa7b-49fa-4898-a44b-ecf1c0556f25
+md"""
+#
+"""
+
+# ╔═╡ 0d0c4ee1-10ff-424f-a501-8dbf2608879f
+md"""
+- Julia also have conventional keywords for the first and last elements of an array: `begin` and `end`.
+- For example, the second to last element of a vector can be retrieved as.
+"""
+
+# ╔═╡ b0052499-31cd-40a1-9784-9bd146ecb886
+my_example_vector[end-1]
+
+# ╔═╡ c48cc1e5-a680-44f0-ab4b-b6bf8453ba5a
+md"""
+#
+"""
+
+# ╔═╡ 7b5759a8-d0b4-4a7b-bd84-6486e249a047
+md"""
+- It also works for matrices.
+- Let’s retrieve the element of the last row and second column.
+"""
+
+# ╔═╡ 16d253ed-2bbc-4de1-88ed-244ba4543d00
+my_example_matrix[end, begin+1]
+
+# ╔═╡ 0815e314-b269-4efa-bc99-fdf33f9e4795
+md"""
+#
+"""
+
+# ╔═╡ 8367611f-e81e-4d68-8203-df970700afe4
+md"""
+- Often, we are not only interested in just one array element, but in a whole subset of array elements.
+- We can accomplish this by slicing an array. 
+- It uses the same index syntax, but with the added colon `:` to denote the boundaries that we are slicing through the array.
+- For example, suppose we want to get the 2nd to 4th element of a vector: 
+"""
+
+# ╔═╡ ad5b63ad-6031-40f4-bc97-94a56b3a45bc
+my_example_vector[2:4]
+
+# ╔═╡ 539120ad-0e3f-4ddb-b92f-8eb93fe06863
+md"""
+#
+"""
+
+# ╔═╡ c55c8b22-c5cb-4af9-91da-1b5138c1681f
+md"""
+- We could do the same with matrices.
+- Particularly with matrices if we want to select all elements in a following dimension we can do so with just a colon `:`.
+- For example, all elements in the second row.
+"""
+
+# ╔═╡ e383bf0b-db35-4ff8-ac30-2aa48dd12819
+my_example_matrix[2, :]
+
+# ╔═╡ 7e24e8ba-792c-4926-a686-91114be1e6f5
+md"""
+#
+"""
+
+# ╔═╡ 69bc4ed8-11f2-4cbc-98aa-6ea5d4412274
+md"""
+- You can interpret this with something like "take 2nd row and all columns". 
+- It also supports `begin` and `end`.
+"""
+
+# ╔═╡ b264aac2-5335-4cbb-a7b8-5889c40da920
+my_example_matrix[begin+1:end, end]
+
+# ╔═╡ 1d26ea5c-0fb5-41b4-b8d7-004f787a7a46
+md"""
+# Array Manipulation
+"""
+
+# ╔═╡ 9e0bad81-1e07-46c3-82fd-3b833f04ff67
+md"""
+- There are several ways we could manipulate an array.
+- The first would be to manipulate a _single element_ of the array.
+- We just index the array by the element and proceed with an assignment =
+"""
+
+# ╔═╡ df7654f1-ad75-4777-9f3b-47fd002b180d
+md"""
+#
+"""
+
+# ╔═╡ 72f13583-b7a8-496e-875c-62ee21e38330
+my_example_matrix[2, 2] = 42
+
+# ╔═╡ 70884b55-e20e-4318-8bc4-d86a8c2360a3
+my_example_matrix
+
+# ╔═╡ a18f832a-82be-4bbe-a128-3ed29cd868f9
+md"""
+#
+"""
+
+# ╔═╡ fcb1f99a-ce24-4c58-8962-ee701a3a62f9
+md"""
+- Or you can manipulate a certain subset of elements of the array.
+- In this case, we need to slice the array and then assign with `=`.
+"""
+
+# ╔═╡ 716be2d5-397f-4ad7-bbcf-4965fc9471cc
+my_example_matrix[3, :] = [17, 16, 15]
+
+# ╔═╡ 88c489c8-01d8-4627-8408-852769d0a7bc
+my_example_matrix
+
+# ╔═╡ 7a072a96-3ab4-4789-b484-39fb1479eff2
+md"""
+#
+"""
+
+# ╔═╡ 31c2c3d6-71c2-44b9-9f35-08555e403f6f
+md"""
+- Note that we had to assign a vector because our sliced array is of type `Vector`.
+"""
+
+# ╔═╡ 707dc086-5e28-45a5-b1f4-81236213ef6b
+typeof(my_example_matrix[3, :])
+
+# ╔═╡ 7d2d869b-a277-4df4-88b8-e950dd4dea5d
+md"""
+#
+"""
+
+# ╔═╡ 47cf947e-5fdd-42c4-89f8-49e30777277f
+md"""
+- The second way we could manipulate an array is to alter its shape. 
+- Suppose you have a 6-element vector and you want to make it a 3x2 matrix.
+- You can do so with reshape, by using the array as first argument and a tuple of dimensions as second argument.
+"""
+
+# ╔═╡ 3165edf3-c58d-45b6-ac5a-b20165e68ff5
+let
+	six_vector = [1, 2, 3, 4, 5, 6];
+	tree_two_matrix = reshape(six_vector, (3, 2))
+end
+
+# ╔═╡ 408a59f5-c0e9-4bd2-9fe4-3c1a54bb7cd9
+md"""
+#
+"""
+
+# ╔═╡ 47a245c6-c39a-4e17-9484-aa13d9d2d998
+md"""
+- You can do the reverse, convert it back to a vector, by specifying a tuple with only one dimension as second argument.
+"""
+
+# ╔═╡ 809d848b-8ee3-4a8c-abdd-7e1d863e0260
+let
+	six_vector = [1, 2, 3, 4, 5, 6];
+	tree_two_matrix = reshape(six_vector, (3, 2))
+	
+	reshape(tree_two_matrix, (6, ))
+end
+
+# ╔═╡ 73989cbd-10c0-4b7e-94fc-59315ead56fd
+md"""
+#
+"""
+
+# ╔═╡ 8924cea3-e558-4ecc-8181-148f70a216a3
+md"""
+- The third way we could manipulate an array is to apply a function over every array element.
+- This is where the familiar broadcasting "dot" operator `.` comes in.
+"""
+
+# ╔═╡ 7bd7abab-b16d-4017-80e9-cd0e9c714a07
+log.(my_example_matrix)
 
 # ╔═╡ a124bf84-7ca4-40c8-8607-b05dec24a730
 md"""
@@ -517,15 +588,16 @@ begin
 	<fieldset>      
     <legend><b>Learning Objectives</b></legend>      
 	<br>
-	<input type="checkbox" value="" checked> Basic Julia Syntax
+	<input type="checkbox" value="" checked> Array, Vector
 	<br>
-	<input type="checkbox" value="" checked> Variables
+	<input type="checkbox" value="" checked> Array Inspection
 	<br>
-	<input type="checkbox" value="" checked> Boolean Operators and Numeric Comparisons
+	<input type="checkbox" value="" checked> Concatenation
 	<br>
-	<input type="checkbox" value="" checked> Functions
+	<input type="checkbox" value="" checked> Indexing, Slicing
 	<br>
-	<input type="checkbox" value="" checked> Control Flow and Loops
+	<input type="checkbox" value="" checked> Array Manipulation
+	<br>
 	<br>
 	</fieldset>      
 	"""
@@ -614,85 +686,111 @@ project_hash = "da39a3ee5e6b4b0d3255bfef95601890afd80709"
 # ╟─ab6ac8d0-6d8a-11ed-0400-1b357312718e
 # ╟─42d2dc69-c5e8-4cb8-809b-19cae75e479d
 # ╟─3e72d672-8f55-4958-af43-6a43c3bbf830
-# ╟─15965456-03b5-41fc-bd5a-e0334f2e48f1
-# ╟─965c2f3a-7aed-48db-9f34-880812267c2a
-# ╟─3632139a-33f4-443c-b692-4f61adc77edd
-# ╟─14fadd48-e6fe-475f-92b8-8970b6487c05
-# ╟─6d90d638-b7c1-4e0b-a1af-8b0cdfa943b2
-# ╟─f406efa1-c642-498a-8bf4-cd4ddcd35f9f
-# ╠═ade0df3a-f591-4c55-8032-c83005daa18a
-# ╠═807e79b5-4c2c-446d-8018-8b1d43336255
-# ╟─8e7f76a8-aef0-405f-b7e1-50ca7d98d6a1
-# ╟─13109b52-c7b4-4260-9607-9ab2793efef7
-# ╠═9bf34305-6dec-46e2-95b4-c7b5d99a61e4
-# ╟─aef0ecc7-ad76-4888-ad41-e54123d16d07
-# ╟─9aacb4dd-4d6e-4b62-87fa-19e364b83c38
-# ╠═40deef2b-c458-43ba-acad-7c02f5ae5787
-# ╟─91a0bd38-0784-4123-876b-85d7361eb579
-# ╟─55a0a539-b89e-4544-9a8f-a6df6218c73b
-# ╠═5238a439-f5ee-4427-9533-b36965254a6d
-# ╟─33f27100-64c9-47ef-b60c-62beba7af90c
-# ╟─cb046dfb-4007-4216-9743-9456e8e4d250
-# ╠═7ed413c6-c0e5-4b85-b4dc-08666c418b28
-# ╟─25c65694-fee6-4a51-bef6-6e8226bf97a0
-# ╟─1d0c2cab-9c8f-44ea-8a1a-df5a80cb4d63
-# ╟─2d20bd5f-e43e-4ff6-9080-0166046c8223
-# ╟─c94cad38-5363-4964-bc42-02010e0a506c
-# ╠═7d8602c2-5a98-472d-a660-15f5f4f60a16
-# ╠═82355982-8aeb-44e7-921f-7f99e4667c03
-# ╠═46fe46fb-a64d-4cb9-9556-9bdea3381a21
-# ╟─c41f8840-5081-421e-9a2e-1b145f00b2ba
-# ╟─aa452762-85fc-49c3-8e90-1da5d208d1b9
-# ╟─1c2d78ab-ab20-424f-a532-b9e26dbc34b5
-# ╟─18716ab1-6ffc-43fa-a9b1-786effbce57d
-# ╠═187e1fd0-b8ba-47d6-9857-5d36c195c2c9
-# ╠═c960a390-9194-48bc-b8c3-b38503d2fa76
-# ╟─29cf39dc-62c5-4a57-add9-32c96c5efb95
-# ╟─ab728c25-7523-4f17-be2a-04f8d69a1182
-# ╠═aaa9341e-4a13-413e-a6ae-7217e6b5d021
-# ╟─e9b473dd-dda5-44df-958b-3eafe9d65cd1
-# ╠═17febe2d-ac87-496b-9ebe-25da47922967
-# ╟─be960870-e0ff-49a3-b14b-dd7716edf25b
-# ╟─6f182c16-b8f5-4835-9ce3-b21af62c5d5c
-# ╟─e060e675-412f-4405-9bd1-eca0501a1b48
-# ╟─d05e6344-74af-4fc6-b88d-6ec8204e1386
-# ╟─3dad3232-da88-4f40-8faf-6ecaf2cf90e5
-# ╟─217cdb78-2aa9-496e-9daa-f20f8e762bf3
-# ╠═2cb1933c-50ac-4fed-844b-52aee0f45b71
-# ╟─bbd1e1c4-11f8-4e9e-9b53-d5111fe83342
-# ╟─4dd59b38-5e55-4272-8570-650061cb9edb
-# ╠═4329e88e-ecbe-4336-b453-fc657d4a1621
-# ╟─b37b6554-e1fd-4742-a80e-1829b5abd015
-# ╠═a0bd7251-d107-4546-bc55-36157dc2f526
-# ╟─9a2f2002-9bc6-4386-a579-b3903f8b61e1
-# ╟─766f70c4-afc4-4e31-86f2-575ee5604d30
-# ╠═b09bcf25-f482-4599-91ce-37781530d8f6
-# ╟─5941aeae-096f-477d-9f8d-99d0de53b527
-# ╟─d1f1e579-de69-4380-acee-9f8793f3f256
-# ╟─c756ea1a-af25-4152-85f2-7e75b9f18d5b
-# ╠═3b659642-6f7f-43ba-9f3d-99561a36e2c0
-# ╠═ce6c05f7-a5a4-4380-bf19-b5e801df1c04
-# ╟─28e15a84-5b59-4732-ae2b-97398b75b987
-# ╟─2d31ec89-d66f-441a-b3b5-9e6baaa77f8a
-# ╟─33e4df84-304e-4047-a8bc-c9f97bc8ab38
-# ╟─7da6031d-600a-4100-ba62-0e312052eba7
-# ╟─62c6d81a-4859-4dc5-9714-b44c117f6aca
-# ╟─e8f7c3ce-256a-4291-b1e4-73dd0c11329d
-# ╠═b5d6e2ae-5ea1-4ed6-9a9e-8bf9c108e46c
-# ╟─44d36e73-fb3b-4c12-83c7-cc4875927d8d
-# ╟─5766ea83-6a34-4968-88f2-387337e06499
-# ╠═69addfa3-5a79-45fe-a05e-ccfd5e877722
-# ╟─ce2dbd2a-a5b8-4b9f-9ea6-3932029f4069
-# ╟─01cd64f7-e024-4def-a8b7-0a03f4276033
-# ╟─7b3bd5e1-7460-4c71-981b-c13176cf8b3d
-# ╟─31338853-5fce-41d8-8366-a0cd5cd8e1ac
-# ╟─8134e48e-0f43-44f4-93ef-91cbef4e7442
-# ╠═cb389ce1-19b2-447e-af81-27b040b94ee5
-# ╟─9d85e2dd-e003-4b89-92c4-7f863583770f
-# ╟─a9694818-e967-431c-858c-a5e30f56962b
-# ╟─0a8e4dec-f313-49e6-9998-9690ae07b3e1
-# ╟─6d951c8d-22f5-4d6d-b4e8-13bf62b28bea
-# ╠═f7da342c-f5ea-4a8c-b2ed-a7ebafb0ef6d
+# ╟─3b735bec-07fe-42cc-903f-7be58c7d0b5c
+# ╟─a80e0671-4028-4c13-9245-ed2833b14507
+# ╟─726fb7b2-fd76-4a5f-8df3-219ac81128a1
+# ╟─71a59a18-3d2f-4eec-8da0-3ca22c422c69
+# ╟─4bcf1a6e-3931-4124-b069-aec95d555ffb
+# ╟─1839b7b9-8070-4605-929d-a5bbebb586be
+# ╠═b2a58ad4-025a-4e76-8622-9eff84867fd8
+# ╟─84c3bb84-62c1-4062-89b0-c3958c00dfc7
+# ╟─933cd76a-992c-4279-b7b9-bb1aaa8c643d
+# ╠═27643565-c0de-452a-a54b-fa769a4fb599
+# ╟─556e7453-e960-44cc-97d1-1d9e52054e9a
+# ╟─51b7e526-114d-4c59-887f-293cee6ac1e6
+# ╠═41916a78-dd3d-481c-9eaf-e6e59ce62b7c
+# ╟─de07142f-c954-4e7c-8311-bb14c1f19f6a
+# ╠═760f526d-231b-411e-ba54-4af6a7ff6128
+# ╟─29084f06-4c3c-43f0-abdd-6e0019ca62d6
+# ╟─9115d5f2-51d1-436a-b537-fc6a9ce0f29e
+# ╠═8861dedb-facc-42c6-87ab-42a623f2e0f5
+# ╠═e0d056a3-ded8-4ee9-b538-d8333290c2de
+# ╟─ebfcfe2b-a754-4102-a57d-d4201f1c533c
+# ╟─02ae1f16-2fab-46da-a8d1-0b2352f63741
+# ╠═0e651f7a-23fc-47ed-a669-fa057dd550d6
+# ╟─8460e092-cb1f-4695-8a27-f405af12ef97
+# ╟─e6c3b951-c354-41ab-bac8-ab1d8ebb675b
+# ╠═1d9439b4-81fe-4301-8d44-704fbbb7a3fb
+# ╟─dc687845-dde8-4fec-9a15-ad72eaf00dc9
+# ╟─e2aff1dd-bc55-4247-9ef5-0d179c1a9870
+# ╠═a8741df0-a2e1-4e2e-adce-53519ae6838d
+# ╟─715474da-85e8-4480-ba58-27bd88def3b8
+# ╟─565acb98-6298-41de-9db1-4a6941c3177e
+# ╠═d0bf452e-92cc-4a60-a148-ad83460c8eb1
+# ╟─3dcc34e1-e6eb-4d7f-a800-2fdebd6ba510
+# ╟─61ce12d0-9f61-4d9b-9120-b7142f5864f5
+# ╠═492f1dbe-b100-484a-8fd5-a0691b3b2a11
+# ╠═c1d27a68-cf2c-4cab-a582-b9615ca18ffd
+# ╟─b75c1aa2-8d62-422e-b03a-a5ddcd26cd2c
+# ╟─cc89b355-3f75-4267-86e0-b2c760719df2
+# ╠═8a0363e3-b6ab-4a6b-9813-a5bd646d4862
+# ╟─f677c208-a001-4d21-8991-d2af09628a6f
+# ╟─2b4e44bd-d162-4c5a-99f0-bf495d15edaf
+# ╠═635cb7dc-4d35-4160-87c3-c12a5266d2e4
+# ╠═cc4fd98f-6435-40f4-bbe6-da792a8e641c
+# ╟─103bbcbd-c30d-45d4-972a-22931d82356b
+# ╟─53fa1274-229d-40af-a469-e7c19cf40425
+# ╠═123674ab-7233-410b-ba2a-3feff99da66d
+# ╟─1fbd4ffc-5aee-43b9-b4b7-205e4202b13f
+# ╠═a159d681-a86a-45ff-8191-2e0447e54763
+# ╟─343cff6e-7d4e-4ce5-bc01-a683681eb44b
+# ╟─7740c5cb-4523-41e1-b934-c73534ced614
+# ╠═11789c5f-14e4-418b-9c48-457cb555577e
+# ╟─23aef7de-4ad3-4cd2-92d6-92f55d471116
+# ╟─3df473cc-3a0f-4dcc-a449-bfd19892f530
+# ╠═5cbad939-364c-4fe6-8bd5-f07952dc0901
+# ╟─02acfe7a-b91a-4a2e-a6e9-8e6c3bb71dde
+# ╟─8069405a-4d69-460b-a569-42e66b3cda37
+# ╠═a2e49d7a-904b-44c0-a4b5-822e16ec9dab
+# ╟─2a245bde-2f26-4611-8faf-5f88fe9d9dbb
+# ╟─589f664c-02ff-412a-838f-8e6b3df6ce05
+# ╟─364d326c-c6d7-4160-b62d-c38f9ddf5355
+# ╠═b64631c0-9cec-4db4-a4b7-9e05cab1e1bf
+# ╠═326c4fe6-27e1-4686-8668-ed5004a36fcc
+# ╟─121f44c8-b81a-4b98-8b14-244636f25b42
+# ╟─1d951c8d-d097-4dc2-b3a6-57de39d009c1
+# ╟─996a86e9-fc64-47e6-b17d-c47637b4f37f
+# ╟─175e936c-089b-447f-8a32-a4e050edd0ad
+# ╠═eda6d22e-06ed-4bbc-81cf-84c92cb007b3
+# ╟─efb24862-cc37-4441-8c53-6c9743cd99a7
+# ╟─8677fc85-1733-4db9-98c6-46e534ac0222
+# ╠═7705e84f-4f52-4316-a630-36c3e904651f
+# ╟─146caa7b-49fa-4898-a44b-ecf1c0556f25
+# ╟─0d0c4ee1-10ff-424f-a501-8dbf2608879f
+# ╠═b0052499-31cd-40a1-9784-9bd146ecb886
+# ╟─c48cc1e5-a680-44f0-ab4b-b6bf8453ba5a
+# ╟─7b5759a8-d0b4-4a7b-bd84-6486e249a047
+# ╠═16d253ed-2bbc-4de1-88ed-244ba4543d00
+# ╟─0815e314-b269-4efa-bc99-fdf33f9e4795
+# ╟─8367611f-e81e-4d68-8203-df970700afe4
+# ╠═ad5b63ad-6031-40f4-bc97-94a56b3a45bc
+# ╟─539120ad-0e3f-4ddb-b92f-8eb93fe06863
+# ╟─c55c8b22-c5cb-4af9-91da-1b5138c1681f
+# ╠═e383bf0b-db35-4ff8-ac30-2aa48dd12819
+# ╟─7e24e8ba-792c-4926-a686-91114be1e6f5
+# ╟─69bc4ed8-11f2-4cbc-98aa-6ea5d4412274
+# ╠═b264aac2-5335-4cbb-a7b8-5889c40da920
+# ╟─1d26ea5c-0fb5-41b4-b8d7-004f787a7a46
+# ╟─9e0bad81-1e07-46c3-82fd-3b833f04ff67
+# ╟─df7654f1-ad75-4777-9f3b-47fd002b180d
+# ╠═72f13583-b7a8-496e-875c-62ee21e38330
+# ╠═70884b55-e20e-4318-8bc4-d86a8c2360a3
+# ╟─a18f832a-82be-4bbe-a128-3ed29cd868f9
+# ╟─fcb1f99a-ce24-4c58-8962-ee701a3a62f9
+# ╠═716be2d5-397f-4ad7-bbcf-4965fc9471cc
+# ╠═88c489c8-01d8-4627-8408-852769d0a7bc
+# ╟─7a072a96-3ab4-4789-b484-39fb1479eff2
+# ╟─31c2c3d6-71c2-44b9-9f35-08555e403f6f
+# ╠═707dc086-5e28-45a5-b1f4-81236213ef6b
+# ╟─7d2d869b-a277-4df4-88b8-e950dd4dea5d
+# ╟─47cf947e-5fdd-42c4-89f8-49e30777277f
+# ╠═3165edf3-c58d-45b6-ac5a-b20165e68ff5
+# ╟─408a59f5-c0e9-4bd2-9fe4-3c1a54bb7cd9
+# ╟─47a245c6-c39a-4e17-9484-aa13d9d2d998
+# ╠═809d848b-8ee3-4a8c-abdd-7e1d863e0260
+# ╟─73989cbd-10c0-4b7e-94fc-59315ead56fd
+# ╟─8924cea3-e558-4ecc-8181-148f70a216a3
+# ╠═7bd7abab-b16d-4017-80e9-cd0e9c714a07
 # ╟─a124bf84-7ca4-40c8-8607-b05dec24a730
 # ╟─75672e0c-5c34-44c8-b1a9-f6ba821d6c8d
 # ╟─5f191192-bc5f-41e8-845c-beba89ee5841
